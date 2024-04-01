@@ -1,2 +1,3 @@
 # study_algorithm
-study_algorithm for Programming
+
+- 알고리즘 학습용(파이썬)

@@ -1,0 +1,38 @@
+# 주어진 장소의 정보를 받는다.
+def solution(places):
+    return [check(place) for place in places]
+
+def check(place):
+    for idx_row, row in enumerate(place):
+        for idx_col, cell in enumerate(row):
+            # P 일때 검사를 해라
+            if cell != 'P':
+                continue
+            isNotEndRow = idx_row != 4
+            isNotEndCol = idx_col != 4
+            isNotFirstCol = idx_col != 0
+            isBeforeThirdRow = idx_row < 3
+            isBeforeThirdCol = idx_col < 3
+            
+            if isNotEndRow:
+                D = place[idx_row + 1][idx_col]
+                if D == 'P': return 0
+                if isBeforeThirdRow:
+                    D2 = place[idx_row + 2][idx_col]
+                    if D2 == 'P' and D != "X": return 0
+                if isNotEndCol:
+                    R = place[idx_row][idx_col + 1]
+                    RD = place[idx_row + 1][idx_col + 1]
+                    if RD == "P" and (D != 'X' or R != 'X'): return 0
+                if isNotFirstCol:
+                    L = place[idx_row][idx_col - 1]
+                    LD = place[idx_row + 1][idx_col - 1]
+                    if LD == "P" and (D != 'X' or L != 'X'): return 0   
+            if isNotEndCol:
+                R = place[idx_row][idx_col + 1]
+                if R == 'P': return 0
+                if isBeforeThirdCol:
+                    R2 = place[idx_row][idx_col + 2]
+                    if R2 == 'P' and R != 'X': return 0
+    
+
